@@ -1,0 +1,16 @@
+{
+  "name": "mean-stack-authentication-client",
+  "version": "0.0.0",
+  "description": "Simple project create express-angular authentication client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "login",
+    "authentication",
+    "mean"
+  ],
+  "author": "anditakaesar",
+  "license": "MIT"
+}
