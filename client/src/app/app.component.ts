@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './classes/user';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +10,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Login Example';
 
-  checkLogin(uName: string, uPass: string): void {
-    // create user object
-    // let user: User = new User();
-    // user.username = uName;
-    // user.password = uPass;
-
-    // this.userService.checkLogin(user);
-  }
+  constructor (public userService: UserService) { }
 }
