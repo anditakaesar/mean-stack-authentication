@@ -13,7 +13,32 @@ describe('baseroute test', () => {
     return chai.request(app).get('/')
       .then(res => {
         expect(res.type).to.eql('application/json');
-      })
+      });
+  });
+
+  it('should have a body', () => {
+    return chai.request(app).get('/')
+      .then(res => {
+        expect(res).to.not.null;
+      });
+  });
+
+  it('should have a expected object', () => {
+    return chai.request(app).get('/')
+      .then(res => {
+        var checkObj = {
+          success: true,
+          msg: 'Hello, World'
+        }
+        expect(res.body).to.eql(checkObj);
+      });
+  });
+
+  it('should have a expected msg', () => {
+    return chai.request(app).get('/')
+      .then(res => {
+        expect(res.body.msg).to.eql('Hello, World');
+      });
   });
 
 });
