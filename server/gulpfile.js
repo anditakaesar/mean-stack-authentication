@@ -1,17 +1,29 @@
 // gulpfile to generate
-const gulp = require('gulp');
-const ts = require('gulp-typescript');
+var gulp = require('gulp');
+var ts = require('gulp-typescript');
 
-const tsProject = ts.createProject('tsconfig.json');
+// gulp for typescript project
+var tsProject = ts.createProject('tsconfig.json');
 
-gulp.task('scripts', () => {
-  const tsResult = tsProject.src()
-    .pipe(tsProject());
+// build the .ts files to folder dist
+function scripts() {
+  var tsResult = tsProject.src().pipe(tsProject());
   return tsResult.js.pipe(gulp.dest('dist'));
-});
+}
 
-gulp.task('watch', ['scripts'], () => {
-  gulp.watch('src/**/*.ts', ['scripts']);
-});
+// watch for changes
+function watch() {
+  gulp.watch('src/**/*.ts', scripts);
+}
 
-gulp.task('default', ['watch']);
+exports.scripts = scripts;
+exports.watch = watch;
+
+// create default series
+var build = gulp.series(watch, scripts);
+
+// expose task
+gulp.task('build', build);
+
+// default task -> run with 'gulp'
+gulp.task('default', build);
