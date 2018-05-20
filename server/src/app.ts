@@ -4,6 +4,8 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import compression = require('compression');
 import methodOverride = require('method-override');
+import errorHandler = require('errorhandler');
+import { UserRouter } from './routes/UserRouter';
 
 class App {
   // express application
@@ -26,9 +28,13 @@ class App {
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(compression());
-
-    // todo: FIND THE DOCS
     this.express.use(methodOverride());
+    this.express.use(errorHandler());
+
+    global.Promise = require("q").Promise;
+
+    // set static folder
+    this.express.use(express.static(path.join(__dirname, 'public')));
   }
 
   // router setup
@@ -44,6 +50,7 @@ class App {
 
     // setting router
     this.express.use('/', router);
+    this.express.use('/users', UserRouter);
   }
 }
 

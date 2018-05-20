@@ -14,6 +14,13 @@ function scripts() {
 // watch for changes
 function watch() {
   gulp.watch('src/**/*.ts', scripts);
+  gulp.watch('public/*.*', copy_public);
+}
+
+// copy anything from public folder
+function copy_public() {
+  gulp.src('public/*.*')
+    .pipe(gulp.dest('./dist/public'));
 }
 
 exports.scripts = scripts;
