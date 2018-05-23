@@ -5,7 +5,9 @@ import * as bodyParser from 'body-parser';
 import compression = require('compression');
 import methodOverride = require('method-override');
 import errorHandler = require('errorhandler');
+import mongoose = require('mongoose');
 import { UserRouter } from './routes/UserRouter';
+import { MONGODB_CONN } from './configs/default';
 
 class App {
   // express application
@@ -20,6 +22,7 @@ class App {
   constructor() {
     this.express = express();
     this.middleware();
+    this.connectDb();
     this.routes();
   }
 
@@ -35,6 +38,23 @@ class App {
 
     // set static folder
     this.express.use(express.static(path.join(__dirname, 'public')));
+  }
+
+  private connectDb(): void {
+    mongoose.connect(MONGODB_CONN);
+
+    // set mongoose promise
+    mongoose.Promise = global.Promise;
+
+    // check connection
+    mongoose.connection.on('connected', () => {
+      console.log('Connected to the database: ' + MONGODB_CONN);
+    });
+
+    // check error on mongodb
+    mongoose.connection.on('error', (err) => {
+      console.log('Database error: ' + err);
+    });
   }
 
   // router setup
