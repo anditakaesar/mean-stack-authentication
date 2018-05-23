@@ -42,3 +42,25 @@ describe('baseroute test', () => {
   });
 
 });
+
+describe('users route test', () => {
+  
+  var bodyparam = {
+    name: "Andita Fahmi",
+    username: "anditax",
+    email: "andita@mailx.com",
+    password: "12345"
+  }
+
+  it('should be json', () => {
+    
+    return chai.request(app)
+      .post('/users/register')
+      .set('content-type', 'application/json')
+      .send(bodyparam)
+      .then(res => {
+        expect(res.type).to.eql('application/json');
+      });
+  });
+
+});
