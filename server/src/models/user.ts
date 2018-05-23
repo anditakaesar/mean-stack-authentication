@@ -41,7 +41,7 @@ function addUser(newUser: User, callback: any): void {
         newUser.password = hash;
         let user = new UserModel(newUser);
         user.save((err, user) => {
-          if (err) {
+          if(err) {
             callback(err, null);
           } else {
             callback(null, newUser);
@@ -54,4 +54,26 @@ function addUser(newUser: User, callback: any): void {
   });
 }
 
-export { UserModel, addUser }
+function comparePassword(candidate: string, hash: string, callback) {
+  bcrypt.compare(candidate, hash, (err, isMatch) => {
+    if(err) throw err;
+    callback(null, isMatch);
+  });
+}
+
+function getUserByUsername(username, callback) {
+  const query = {username: username};
+  UserModel.findOne(query, callback);
+}
+
+function getUserById(id, callback) {
+  UserModel.findById(id, callback);
+}
+
+export { 
+  UserModel, 
+  addUser, 
+  comparePassword, 
+  getUserByUsername,
+  getUserById
+}
