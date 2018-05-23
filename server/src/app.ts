@@ -8,6 +8,8 @@ import errorHandler = require('errorhandler');
 import mongoose = require('mongoose');
 import { UserRouter } from './routes/UserRouter';
 import { MONGODB_CONN } from './configs/default';
+import { ConfigPassport } from './configs/passport';
+import passport = require('passport');
 
 class App {
   // express application
@@ -38,6 +40,12 @@ class App {
 
     // set static folder
     this.express.use(express.static(path.join(__dirname, 'public')));
+
+    // Passport Middleware
+    this.express.use(passport.initialize());
+    this.express.use(passport.session());
+
+    ConfigPassport(passport);
   }
 
   private connectDb(): void {
