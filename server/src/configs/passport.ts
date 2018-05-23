@@ -12,7 +12,8 @@ function ConfigPassport(passport: any): void {
   }
 
   passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    getUserById(jwt_payload._id, (err, user) => {
+    // console.log(jwt_payload);
+    getUserById(jwt_payload._doc._id, (err, user) => {
       if(err) {
         return done(err, false);
       }
