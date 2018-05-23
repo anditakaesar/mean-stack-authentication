@@ -2,6 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { User } from '../interfaces/user';
 import { addUser, comparePassword, getUserByUsername } from '../models/user';
 import jwt = require('jsonwebtoken');
+import passport = require('passport');
 import { SECRET } from '../configs/default';
 
 const router: Router = Router();
@@ -103,18 +104,14 @@ function getProfileUser(req: Request, res: Response, next: NextFunction): void {
   res.json({
     success: true,
     msg: 'User Retreived',
-    user: {
-      username: 'username',
-      name: 'name',
-      passwrod: 'password'
-    }
+    user: req.user
   });
 }
 
 // setup routers
 router.post('/register', registerUser);
 router.post('/authenticate', authenticateUser);
-router.get('/profile', getProfileUser);
+router.get('/profile', passport.authenticate('jwt', {session: false}), getProfileUser);
 
 // export as router
 export { router as UserRouter }
