@@ -1,0 +1,15 @@
+// todo
+
+CLIENT-ANGULAR
+	NPM-INSTALL @ANGULAR/CLI
+	INIT (ng new client)
+	CREATE FIELD
+		FIELD USERNAME
+		FIELD PASSWORD
+	CREATE CLASS: user
+	
+// build backend using typescript
+CREATE PROJECT .json
+	EXPRESS FOLDER
+		src
+		dist
