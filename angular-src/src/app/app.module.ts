@@ -7,6 +7,9 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -15,10 +18,13 @@ import { RegisterComponent } from './components/register/register.component';
     LoginComponent,
     DashboardComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
