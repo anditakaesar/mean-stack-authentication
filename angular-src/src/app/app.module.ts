@@ -10,6 +10,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { CustommaterialmoduleModule } from './/custommaterialmodule.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CustommaterialmoduleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
