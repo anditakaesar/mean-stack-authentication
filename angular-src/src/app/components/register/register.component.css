@@ -1,0 +1,26 @@
+.reg-card {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.reg-form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.reg-form-container > * {
+  width: 100%;
+}
+
+.reg-form-right-align {
+  text-align: right;
+}
+
+input.reg-form-right-align::-webkit-outer-spin-button,
+input.reg-form-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.reg-form-right-align {
+  -moz-appearance: textfield;
+}
