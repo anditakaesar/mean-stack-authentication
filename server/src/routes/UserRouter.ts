@@ -10,28 +10,38 @@ const router: Router = Router();
 // register user
 function registerUser(req: Request, res: Response, next: NextFunction): void {
 
-  let user: User = {
-    name : req.body.name,
-    username : req.body.username,
-    email : req.body.email,
-    password : req.body.password
+  // check if required body exists
+  if ( !req.body.name || !req.body.username || !req.body.email || !req.body.password ) {
+    res.json({
+      success: false,
+      msg: 'Register Failed',
+      err: 'Request body error!'
+    });
+  } else {
+    let user: User = {
+      name : req.body.name,
+      username : req.body.username,
+      email : req.body.email,
+      password : req.body.password
+    }
+  
+    addUser(user, (err, user) => {
+      if(err) {
+        res.json({
+          success: false,
+          msg: 'Register Failed',
+          err: err.message
+        });
+      } else {
+        res.json({
+          success: true,
+          msg: 'Register Success',
+          user: user
+        });
+      }
+    });
   }
 
-  addUser(user, (err, user) => {
-    if(err) {
-      res.json({
-        success: false,
-        msg: 'Register Failed',
-        err: err.message
-      });
-    } else {
-      res.json({
-        success: true,
-        msg: 'Register Success',
-        user: user
-      });
-    }
-  });
 }
 
 // authenticate username and password
