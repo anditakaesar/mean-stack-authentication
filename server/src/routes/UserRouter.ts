@@ -46,33 +46,17 @@ function registerUser(req: Request, res: Response, next: NextFunction): void {
 
 // authenticate username and password
 function authenticateUser(req: Request, res: Response, next: NextFunction): void {
-  const username = req.body.username;
-  const password = req.body.password;
-
-  getUserByUsername(username, (err, user) => {
-    if(err) {
-      res.json({
-        success: false,
-        msg: 'Found an error!',
-        err: err
-      });
-    }
-
-    if(!user) {
-      res.json({
-        success: false,
-        msg: 'User not found!'
-      });
-    }
-
-    if(!user.password) {
-      res.json({
-        success: false,
-        msg: 'Password is empty!'
-      });
-    }
-
-    comparePassword(password, user.password, (err, isMatch) => {
+  if ( !req.body.username || !req.body.password ) {
+    res.json({
+      success: false,
+      msg: 'Found an error!',
+      err: 'Request body error!'
+    });
+  } else {
+    const username = req.body.username;
+    const password = req.body.password;
+  
+    getUserByUsername(username, (err, user) => {
       if(err) {
         res.json({
           success: false,
@@ -80,33 +64,57 @@ function authenticateUser(req: Request, res: Response, next: NextFunction): void
           err: err
         });
       }
-
-      if(isMatch) {
-        const token = jwt.sign(Object.assign({}, user), SECRET, {
-          expiresIn: '7d' // 1 week
-        });
-
-        res.json({
-          success: true,
-          msg: 'User Authenticated',
-          token: 'JWT ' + token,
-          user: {
-            id: user._id,
-            name: user.name,
-            username: user.username,
-            email: user.email
-          }
-        });
-      } else {
+  
+      if(!user) {
         res.json({
           success: false,
-          msg: 'Wrong password!'
+          msg: 'User not found!'
         });
       }
-
-    }); // comparePassword
-  }); // getUserByUsername
-
+  
+      if(!user.password) {
+        res.json({
+          success: false,
+          msg: 'Password is empty!'
+        });
+      }
+  
+      comparePassword(password, user.password, (err, isMatch) => {
+        if(err) {
+          res.json({
+            success: false,
+            msg: 'Found an error!',
+            err: err
+          });
+        }
+  
+        if(isMatch) {
+          const token = jwt.sign(Object.assign({}, user), SECRET, {
+            expiresIn: '7d' // 1 week
+          });
+  
+          res.json({
+            success: true,
+            msg: 'User Authenticated',
+            token: 'JWT ' + token,
+            user: {
+              id: user._id,
+              name: user.name,
+              username: user.username,
+              email: user.email
+            }
+          });
+        } else {
+          res.json({
+            success: false,
+            msg: 'Wrong password!'
+          });
+        }
+  
+      }); // comparePassword
+    }); // getUserByUsername
+  }
+  
 } // authenticateUser
 
 function getProfileUser(req: Request, res: Response, next: NextFunction): void {
