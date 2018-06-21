@@ -65,6 +65,10 @@ server/public/
 # angular-src
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# angular.json file --> always changed
+/angular-src/angular.json
+
+
 # compiled output
 /angular-src/dist
 /angular-src/dist-server
