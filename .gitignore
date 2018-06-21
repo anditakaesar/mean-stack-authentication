@@ -82,6 +82,7 @@ server/public/
 *.launch
 .settings/
 *.sublime-workspace
+/angular-src/.editorconfig
 
 # IDE - VSCode
 .vscode/*
