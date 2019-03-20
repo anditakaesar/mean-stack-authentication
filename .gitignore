@@ -59,3 +59,56 @@ typings/
 
 
 server/dist/
+
+server/public/
+
+# angular-src
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# angular.json file --> always changed
+/angular-src/angular.json
+
+
+# compiled output
+/angular-src/dist
+/angular-src/dist-server
+/angular-src/tmp
+/angular-src/out-tsc
+
+# dependencies
+/angular-src/node_modules
+
+# IDEs and editors
+/angular-src/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+/angular-src/.editorconfig
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/angular-src/.sass-cache
+/angular-src/connect.lock
+/angular-src/coverage
+/angular-src/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/angular-src/typings
+
+# e2e
+/angular-src/e2e/*.js
+/angular-src/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
